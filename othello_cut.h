@@ -198,7 +198,7 @@ inline bool state_t::outflank(bool color, int pos) const {
         if( (p < x - 1) && (p >= dia1[pos - 4]) && !is_free(*p) ) return true;
     }
 	
-	// Check diagonal 1
+	// Check diagonal 2
     x = dia2[pos - 4];
     while( *x != pos ) ++x;
     if( *(x+1) != -1 ) {
