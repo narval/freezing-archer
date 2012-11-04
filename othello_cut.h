@@ -122,7 +122,7 @@ class state_t {
         return valid_moves.empty() ? -1 : valid_moves[lrand48() % valid_moves.size()];
     }
 	
-    int succ(bool color) {
+    std::vector<int> succ(bool color) {
         std::vector<int> valid_moves;
         for( int pos = 0; pos < DIM; ++pos ) {
             if( (color && is_black_move(pos)) || (!color && is_white_move(pos)) ) {
@@ -354,4 +354,8 @@ inline void state_t::print_bits(std::ostream &os) const {
 inline std::ostream& operator<<(std::ostream &os, const state_t &state) {
     state.print(os);
     return os;
+}
+
+int main() {
+
 }
