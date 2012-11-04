@@ -355,7 +355,3 @@ inline std::ostream& operator<<(std::ostream &os, const state_t &state) {
     state.print(os);
     return os;
 }
-
-int main() {
-
-}
