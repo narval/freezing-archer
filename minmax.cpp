@@ -1,58 +1,35 @@
 #include "othello_cut.h"
 using namespace std;
 int out = -1;
-int alpha;
+
 
 int minMax(state_t n,int d,bool color, vector<int> pepe) {
-  cout << "existo" << endl;
-  for (vector<int>::iterator iter =pepe.begin(), limit=pepe.end(); iter != limit; ++iter) cout << *iter << " ";
-  cout << endl;
-
+  int alpha;
   if (n.terminal() ){
-    cout << "terminal" << endl;
-    cout << "alpha: " ;
-    cout << n.value() << endl;
-    cout << endl;
-    cout << endl;
-    cout << n;
-    cout << endl;
-    cout << endl;
-
-
-    return n.value();
+    return n.value() * (color ? 1 : -1);
   }
+
+
   alpha = -2147483647;
-  //cout << DIM;
   bool succ= false;
 
-  for( int pos = 0; pos < DIM; ++pos ) {
-    cout << "pos " << pos << endl;
+  for( int pos = 0; pos < DIM or (pos == DIM and !succ); ++pos ) {
 
     if( (color && n.is_black_move(pos)) || (!color && n.is_white_move(pos)) ) {
 
       succ=true;
       int aux = alpha;
-      pepe.push_back(pos);
-      state_t hijo = state_t();
-      hijo = n;
-      cout << "chao "<< pos << endl;
-      alpha= MAX(alpha,-minMax(hijo.move(color,pos),pos,!color, pepe));
-      pepe.pop_back();
+      int m_M=-minMax(n.move(color,pos),pos,!color, pepe);
+      alpha= MAX(alpha,m_M);
+
       if (alpha!=aux){
         out=pos;
       }
     }
-  }
 
-  if(!succ){
-    cout << "color: " ;
-    cout << color << endl ;
-    pepe.push_back(36);
-    alpha=minMax(n,d,!color, pepe);
-    out=36;
-    }
+ }
 
-  return alpha;
+ return alpha;
 
 }
 
@@ -92,33 +69,33 @@ int main(){
   cout << root;
   root=root.move(true,14);
   cout << root;
-  root=root.move(!true,31);
+  //root=root.move(!true,31);
   cout << root;
-  root=root.move(true,20);
+  //root=root.move(true,20);
   cout << root;
-  root=root.move(!true,32);
+  //root=root.move(!true,32);
   cout << root;
-  root=root.move(true,30);
+  //root=root.move(true,30);
   cout << root;
-  root=root.move(!true,10);
+  //root=root.move(!true,10);
   cout << root;
-  root=root.move(true,25);
+  //root=root.move(true,25);
   cout << root;
-  root=root.move(!true,24);
+  //root=root.move(!true,24);
   cout << root;
-  root=root.move(true,34);
+  //root=root.move(true,34);
   cout << root;
-  root=root.move(!true,28);
+  //root=root.move(!true,28);
   cout << root;
-  root=root.move(true,16);
+  //root=root.move(true,16);
   cout << root;
-  root=root.move(!true,4);
+  //root=root.move(!true,4);
   cout << root;
-  root=root.move(true,29);
+  //root=root.move(true,29);
   cout << root;
-   root=root.move(!true,35);
+  //root=root.move(!true,35);
   cout << root;
-  root=root.move(true,36);
+  //root=root.move(true,36);
   cout << root;
   //root=root.move(!true,8);
   cout << root;
@@ -130,8 +107,8 @@ int main(){
   vector<int> pepe;
   int v = minMax(root,out,!true, pepe);
   state_t result = state_t(v);
-  cout << v << endl;
-  cout << out << endl;
+  cout << "minMax: " << v << endl;
+  cout << "pos: " << out << endl;
 
   
   
