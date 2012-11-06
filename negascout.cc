@@ -17,18 +17,18 @@ int negascout(state_t s, int alpha, int beta, bool color) {
     color_ = !color; 
     succ_ = s.succ(color_);
   }
-  
+
   cout << succ_.size() << " - - " << color_ << " === " << succ_.front() << endl;
-  
+
   for(vector<int>::const_iterator iter=succ_.begin(),limit=succ_.end();iter!=limit;++iter) {
     state_t n = s.move(color_,*iter);
     int score = -negascout(n,-b,-alpha,!color_);
-	if ((alpha < score) && (score < beta) && (*iter!=*(succ_.begin())))
-	  score = -negascout(n,-beta,-alpha,!color_);
+    if ((alpha < score) && (score < beta) && (*iter!=*(succ_.begin())))
+      score = -negascout(n,-beta,-alpha,!color_);
     alpha = std::max(alpha,score);
     if (alpha >= beta)
       return alpha;
-    b = alpha + 1;	  
+    b = alpha + 1;
   }
   return alpha;
 }
@@ -45,7 +45,7 @@ int main() {
  cout << root << endl;
  root=root.move(true,22);
  cout << root << endl;
- root=root.move(!true,18);
+   root=root.move(!true,18);
  cout << root << endl;
  root=root.move(true,7);
  cout << root << endl;
@@ -102,7 +102,7 @@ int main() {
  root=root.move(true,9);
  cout << root << endl;*/
  cout << "Valor:" << root.value() << endl;
-  
+ 
  int v = negascout(root,numeric_limits<signed int>::min(),numeric_limits<signed int>::max(),!true);
  
 //std::vector<int> v();  
