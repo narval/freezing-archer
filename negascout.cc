@@ -1,21 +1,31 @@
 #include "othello_cut.h"
 #include <limits>
 #include <vector>
+#include <algorithm>
+
 using namespace std;
 
-
 int negascout(state_t s, int alpha, int beta, bool color) {
-  cout << s << endl;
   if (s.terminal())
-     return s.value();
+     return s.value() * (color ? 1 : -1);
   int b = beta;
-  vector<int> succ_ = s.succ(!color);
+  bool color_ = color;
+  vector<int> succ_ = s.succ(color_);
+  int _succ = succ_.size();
+  
+  if(!_succ) {
+    color_ = !color; 
+    succ_ = s.succ(color_);
+  }
+  
+  cout << succ_.size() << " - - " << color_ << " === " << succ_.front() << endl;
+  
   for(vector<int>::const_iterator iter=succ_.begin(),limit=succ_.end();iter!=limit;++iter) {
-    state_t n = s.move(!color,*iter);
-    int score = -negascout(n,-b,-alpha,!color);
-	if ((alpha < score) && (score < beta) && (iter!=succ_.begin()))
-	  score = -negascout(n,-beta,-alpha,!color);
-    alpha = max(alpha,score);
+    state_t n = s.move(color_,*iter);
+    int score = -negascout(n,-b,-alpha,!color_);
+	if ((alpha < score) && (score < beta) && (*iter!=*(succ_.begin())))
+	  score = -negascout(n,-beta,-alpha,!color_);
+    alpha = std::max(alpha,score);
     if (alpha >= beta)
       return alpha;
     b = alpha + 1;	  
@@ -77,11 +87,11 @@ int main() {
  cout << root << endl;
  root=root.move(!true,28);
  cout << root << endl;
- root=root.move(true,16);
+ root=root.move(true,16);// 8
  cout << root << endl;
- root=root.move(!true,4);
+ root=root.move(!true,4); //-4
  cout << root << endl;
- root=root.move(true,29);
+ /*root=root.move(true,29); // 8
  cout << root << endl;
  root=root.move(!true,35);
  cout << root << endl;
@@ -89,12 +99,12 @@ int main() {
  cout << root << endl;
  root=root.move(!true,8);
  cout << root << endl;
- /*root=root.move(true,9);
+ root=root.move(true,9);
  cout << root << endl;*/
- cout << "Valor:";
- cout << root.value() << endl;
+ cout << "Valor:" << root.value() << endl;
   
-  int v = negascout(root,numeric_limits<signed int>::min(),numeric_limits<signed int>::max(),false);
-  
-  cout << v << endl;
+ int v = negascout(root,numeric_limits<signed int>::min(),numeric_limits<signed int>::max(),!true);
+ 
+//std::vector<int> v();  
+ cout << v << endl;
 }
