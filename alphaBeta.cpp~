@@ -60,7 +60,7 @@ int main(int argc, char* argv[]){
         val[i]=root;
         root =root.move(color,PV[i]);
         color=!color;
-        //cout << root;
+        cout << root;
         }
         
        // cout << "hola1" << endl;
