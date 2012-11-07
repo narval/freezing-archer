@@ -221,11 +221,11 @@ int main() {
  cout << root << endl;
  root=root.move(!true,24);
  cout << root << endl;
- /*root=root.move(true,34);
+ root=root.move(true,34);
  cout << root << endl;
  root=root.move(!true,28);
  cout << root << endl;
- root=root.move(true,16);
+ /*root=root.move(true,16);
  cout << root << endl;
  root=root.move(!true,4);
  cout << root << endl;
