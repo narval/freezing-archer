@@ -1,9 +1,9 @@
-#include "othello_cut.h"
+// #include "othello_cut.h"
 using namespace std;
 int out = -1;
 
 
-int minMax(state_t n,int d,bool color, vector<int> pepe) {
+int minMax(state_t n,bool color) {
   int alpha;
   if (n.terminal() ){
     return n.value() * (color ? 1 : -1);
@@ -19,7 +19,7 @@ int minMax(state_t n,int d,bool color, vector<int> pepe) {
 
       succ=true;
       int aux = alpha;
-      int m_M=-minMax(n.move(color,pos),pos,!color, pepe);
+      int m_M=-minMax(n.move(color,pos),!color);
       alpha= MAX(alpha,m_M);
 
       if (alpha!=aux){
@@ -33,7 +33,7 @@ int minMax(state_t n,int d,bool color, vector<int> pepe) {
 
 }
 
-int main(){
+/*int main(){
   state_t root = state_t();
   root=root.move(true,12);
   cout << root;
@@ -114,3 +114,4 @@ int main(){
   
   return 0;
 }
+*/
