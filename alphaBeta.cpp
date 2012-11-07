@@ -5,7 +5,7 @@ int out = -1;
 
 int alpha_beta_prunning(state_t n, int alpha, int beta, bool color){
   if (n.terminal()){
-    return n.value();
+    return n.value() * (color ? 1 : -1);
   }
 
   vector<int> successors = n.succ(color);  

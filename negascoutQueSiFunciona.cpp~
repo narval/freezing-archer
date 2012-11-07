@@ -131,9 +131,9 @@ int main() {
  cout << root << endl;
  root=root.move(!true,15);
  cout << root << endl;
- //root=root.move(true,14);
+ root=root.move(true,14);
  cout << root << endl;
- //root=root.move(!true,31);
+ root=root.move(!true,31);
  cout << root << endl;
  //root=root.move(true,20);
  cout << root << endl;
