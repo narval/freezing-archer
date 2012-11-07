@@ -33,6 +33,7 @@ int negascout(state_t s, int alpha, int beta, bool color) {
   return alpha;
 }
 
+/*
 int main() {
  state_t root = state_t();
  root=root.move(true,12);
@@ -101,10 +102,11 @@ int main() {
  cout << root << endl;
  root=root.move(true,9);
  cout << root << endl;*/
- cout << "Valor:" << root.value() << endl;
+/* cout << "Valor:" << root.value() << endl;
  
  int v = negascout(root,numeric_limits<signed int>::min(),numeric_limits<signed int>::max(),!true);
  
 //std::vector<int> v();  
  cout << v << endl;
 }
+*/
