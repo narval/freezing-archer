@@ -48,6 +48,7 @@ int F_(state_t s, int alpha, int beta, bool color) {
   
   if (_succ) { 
     n = s.move(color_,succ_.front());
+	
     m = max(m,G_(n,alpha,beta,!color_));
     if(m >= beta)
       return m;
@@ -56,11 +57,12 @@ int F_(state_t s, int alpha, int beta, bool color) {
       if (iter != succ_.begin()) {
 	    n = s.move(color_,*iter);
 	    int t = G_(n,m,m + 1,!color_);
-	    if (t > m)
+	    if (t > m) {
           if (t >= beta) 
              m = t;
           else
              m = G_(n,t,beta,!color_);
+		}
         if (m >= beta)
           return m;
 	  }
@@ -72,13 +74,12 @@ int F_(state_t s, int alpha, int beta, bool color) {
       return m;
 	  
 	int t = G_(s,m,m + 1,!color_);
-	if (t > m)
+	if (t > m) {
       if (t >= beta) 
          m = t;
       else
          m = G_(s,t,beta,!color_);
-    if (m >= beta)
-      return m;
+	}
   }  
   
   return m;
@@ -106,13 +107,14 @@ int G_(state_t s, int alpha, int beta, bool color) {
       if (iter!=succ_.begin()) {
 	    n = s.move(color_,*iter);
 	    int t = F_(n,m,m + 1,!color_);
-	    if (t <= m)
+	    if (t <= m){
           if (t <= alpha) 
             m = t;
           else
-           m = F_(n,alpha,t,!color_);
+            m = F_(n,alpha,t,!color_);
+		}
         if (m <= alpha)
-        return m;	  
+          return m;	  
 	  }
     }
   }
@@ -122,13 +124,12 @@ int G_(state_t s, int alpha, int beta, bool color) {
       return m;
 	  
 	int t = F_(s,m,m + 1,!color_);
-	if (t <= m)
+	if (t <= m){
       if (t <= alpha) 
          m = t;
       else
          m = F_(s,alpha,t,!color_);
-    if (m <= alpha)
-      return m;	  
+	}
   }
   
   return m;
@@ -215,7 +216,7 @@ int main() {
  cout << root << endl;
  root=root.move(true,30);
  cout << root << endl;
- root=root.move(!true,10);
+ /*root=root.move(!true,10);
  cout << root << endl;
  root=root.move(true,25);
  cout << root << endl;
@@ -225,7 +226,7 @@ int main() {
  cout << root << endl;
  root=root.move(!true,28);
  cout << root << endl;
- /*root=root.move(true,16);
+ root=root.move(true,16);
  cout << root << endl;
  root=root.move(!true,4);
  cout << root << endl;
@@ -241,7 +242,7 @@ int main() {
  cout << root << endl;*/
  cout << "Valor: " << root.value() << endl;
   
- int v = negascout(root,numeric_limits<signed int>::min(),numeric_limits<signed int>::max(),true);
+ int v = negascout(root,numeric_limits<signed int>::min(),numeric_limits<signed int>::max(),!true);
  
 //std::vector<int> v();  
  cout << v << endl;
